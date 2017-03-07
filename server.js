@@ -5,6 +5,7 @@ const app = express();
 const knex = require('./knex');
 
 const bodyParser = require('body-parser');
+app.use(bodyParser.json());
 
 const port = 5000;
 
