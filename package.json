@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "knex": "knex",
-    "heroku-postbuild": "knex migrate:latest && knex seed:run",
+    "heroku-postbuild": "knex migrate:latest",
     "start": "nodemon server.js"
   },
   "engines": {
