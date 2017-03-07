@@ -9,11 +9,7 @@ app.use(bodyParser.json());
 
 const port = process.env.PORT || 5000;
 
-app.get('/', (req, res) => {
-  res.send('hello world');
-})
-
-app.get('/projects/:code', (req, res) => {
+app.get('/project/:code', (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
 
   knex('projects')
@@ -23,11 +19,40 @@ app.get('/projects/:code', (req, res) => {
   })
 });
 
-app.get('/components/:projectId', (req, res) => {
+app.get('/component/:projectId', (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
 
   knex('components')
   .where('project', req.params.projectId)
+  .then((data) => {
+    res.send(data);
+  })
+})
+
+//post new project
+app.post('/project', (req, res) => {
+  var newProj = {
+    code: req.body.code,
+    name: req.body.name
+  }
+
+  knex('projects')
+  .insert(newProj, "*")
+  .then((data) => {
+    res.send(data);
+  });
+})
+
+app.post('/component', (req, res) => {
+  var newComp = {
+    project: req.body.project,
+    name: req.body.name,
+    length: req.body.length,
+    width: req.body.width
+  }
+
+  knex('components')
+  .insert(newComp, '*')
   .then((data) => {
     res.send(data);
   })
