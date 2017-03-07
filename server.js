@@ -8,9 +8,9 @@ const bodyParser = require('body-parser');
 
 const port = 5000;
 
-app.get('/projects/:id', (req, res) => {
+app.get('/projects/:code', (req, res) => {
   knex('projects')
-  .where('id', req.params.id)
+  .where('code', req.params.code)
   .then((data)=>{
     res.send(data);
   })
