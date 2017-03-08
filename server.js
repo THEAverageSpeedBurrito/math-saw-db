@@ -21,7 +21,7 @@ app.get('/project/:code', (req, res) => {
     project = project[0];
 
     knex('components')
-    .where('project', project)
+    .where('project', project.code)
     .then((components) => {
       project.components = components;
       res.send(project);
