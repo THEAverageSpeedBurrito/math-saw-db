@@ -35,7 +35,7 @@ app.get('/component/:projectId', (req, res) => {
 //post new project
 app.post('/project', (req, res) => {
   var newProj = {
-    code: req.body.code
+    code: req.body.code,
     name: req.body.name
   }
 
