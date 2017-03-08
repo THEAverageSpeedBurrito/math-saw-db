@@ -3,6 +3,9 @@
 const express = require('express');
 const app = express();
 const knex = require('./knex');
+const cors = require('cors')
+
+app.use(cors);
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -32,8 +35,8 @@ app.get('/component/:projectId', (req, res) => {
 //post new project
 app.post('/project', (req, res) => {
   var newProj = {
-    code: req.body.code || 'abc',
-    name: req.body.name || 'name'
+    code: req.body.code
+    name: req.body.name
   }
 
   knex('projects')
