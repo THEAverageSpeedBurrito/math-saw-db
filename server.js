@@ -68,6 +68,23 @@ app.post('/component', (req, res) => {
   })
 })
 
+app.delete('/project/:code', (req, res) => {
+  knex('projects')
+  .where('code', req.params.code)
+  .then((project) => {
+    project = project[0];
+
+    knex('components')
+    .del()
+    .where('project', project.id);
+    .then(() => {
+      knex('projects')
+      .del()
+      .where('code', req.params.code)
+    })
+  })
+})
+
 app.listen(port, () => {
   console.log('listening on port', port);
 })
